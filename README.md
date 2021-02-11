@@ -1,11 +1,9 @@
-## JavaScript Advanced - Curs 3
+React 3
 
-Pentru a rula aceasta etapa (in linie de comanda):
+# Description
 
-#### 1. `git clone https://github.com/razvancir96/react-curs03.git`
+Creating the UserItem and UserList components for displaying a list of user from a fake Rest API (https://jsonplaceholder.typicode.com/) 
 
-#### 2. `cd react-curs03`
+Adding users, from AddForm component, at the end of the displayed users list.
 
-#### 3. `npm install` (posibil sa dureze)
-
-#### 4. `npm start`
+In the application there is also a button that changes the background. The change is made by changing the state.

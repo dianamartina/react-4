@@ -1,12 +1,13 @@
 import React from 'react';
 // ATENTIE! Nu uitati sa importati componentele create!
 import UserList from './components/UserList';
+import UserAddForm from './components/UserAddForm';
 import './App.css';
 
 class App extends React.Component {
   constructor() {
     // MOUNTING: cand componenta este montata(incarcata), prima metoda apelata este constructor
-    console.log('Constructor called!');
+    // console.log('Constructor called!');
     super();
     // Pentru a putea prelucra informatia userilor, trebuie sa le tinem datele in state
     // structura adecvata este un vector de obiecte.
@@ -16,11 +17,12 @@ class App extends React.Component {
       users: []
     };
   }
+  
 
   // MOUNTING: Cand componenta se termina de montat(a rulat render() pentru prima oara) este apelata
   // metoda componentDidMount.
   componentDidMount() {
-    console.log('App component finished mounting!');
+    // console.log('App component finished mounting!');
     // ATENTIE! De cele mai multe ori, vom primi datele despre userii nostri de la un API. Daca vrem doar
     // sa afisam niste date primite in pagina, am vrea sa le cerem o singura data: cand montam pagina. Mai
     // precis, cand terminam de montat pagina, vrem sa si aducem datele de la API(backend).
@@ -36,11 +38,25 @@ class App extends React.Component {
   // setState() sau primeste din exterior props-uri diferite), pe langa reapelarea metodei render(),
   // la finalul actualizarii este apelata metoda componentDidUpdate.
   componentDidUpdate() {
-    console.log('App component was updated!');
+    // console.log('App component was updated!');
   }
 
   changeColor(event) {
     this.setState({background: event.target.value});
+    // console.log(this.state.background);
+  }
+
+  addNewUser(user) {
+    //Niciodata nu trebuie sa avem this.state in interiorul lui this.state !!!!
+    // this.setState({ users: [
+    //   ...this.state.users, user
+    // ]})
+    this.setState(function(prevState) {
+      return { users: [
+        ...prevState.users, 
+        user
+      ]}
+    })
   }
 
   render() {
@@ -48,10 +64,14 @@ class App extends React.Component {
     // UPDATING: Cand componenta este actualizata, este apelata metoda render
     // Asadar, tineti minte: render este o metoda care face parte atat din ciclul de montare,
     // cat si din cel de actualizare.
-    console.log('App component rendered!');
+    // console.log('App component rendered!');
+    
+    // console.log(this.state.background);
+    
     return(
       <div className="app" style={{background: this.state.background}}>
         <h1>HELLO WORLD!</h1>
+        <UserAddForm addNewUser={(user) => this.addNewUser(user)}/>
         {/* De data asta, avand o lista de useri, ne vom crea comonenta UserList,
         careia ii vom pasa ca props informatiile din state-ul curent. */}
         {/* Am adaugat si o conditie suplimentara: lista de useri va fi afisata
